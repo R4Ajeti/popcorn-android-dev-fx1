@@ -49,11 +49,13 @@ public class TrailerPlayerActivity extends ButterBaseActivity implements VideoPl
     private Media mMedia;
     private VideoPlayerFragment mVideoPlayerFragment;
 
+
     @Inject
     YouTubeManager youTubeManager;
 
     public final static String LOCATION = "stream_url";
     public final static String DATA = "video_data";
+    public final static String SFILMAAPOTRAILER = "qfare_e_dhene";
 
     public static Intent startActivity(Activity activity, String youTubeUrl, Media data) {
         Intent i = new Intent(activity, TrailerPlayerActivity.class);
@@ -63,6 +65,25 @@ public class TrailerPlayerActivity extends ButterBaseActivity implements VideoPl
         return i;
     }
 
+    // shtuar kodi
+
+    public static Intent startActivity(Activity activity, String youTubeUrl, Media data, String filmaApoTrailer) {
+        //this.filmaApoTrailer=filmaApoTrailer;
+        Intent i = new Intent(activity, TrailerPlayerActivity.class);
+        i.putExtra(DATA, data);
+        i.putExtra(LOCATION, youTubeUrl);
+        i.putExtra(SFILMAAPOTRAILER, filmaApoTrailer);
+
+        activity.startActivity(i);
+        return i;
+    }
+    /* public void onCreate(Bundle savedInstanceState){
+         this.onCreate(savedInstanceState, filmaApoTrailer);
+     }*/
+    public void setFilmaApoTrailer(String filmaApoTrailer){
+        //this.filmaApoTrailer=filmaApoTrailer;
+    };
+    //Shtuar kodi
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -72,7 +93,16 @@ public class TrailerPlayerActivity extends ButterBaseActivity implements VideoPl
         super.onCreate(savedInstanceState, R.layout.activity_videoplayer);
 
         mMedia = getIntent().getParcelableExtra(DATA);
-        mMedia.title += " " + getString(R.string.trailer);
+        String filmaApoTrailer = "";
+
+        filmaApoTrailer = getIntent().getStringExtra(SFILMAAPOTRAILER);
+
+        if(filmaApoTrailer.equals(getString(R.string.filmi_bar))){
+            mMedia.title += " " + getString(R.string.filmi_bar);
+        }
+        else {
+            mMedia.title += " " + getString(R.string.trajlleri_bar);
+        }
         String youTubeUrl = getIntent().getStringExtra(LOCATION);
 
         mStreamInfo = new StreamInfo(mMedia, null, null, null, null, null);

@@ -46,6 +46,7 @@ public class MovieResponse extends Response<Movie> {
 
             movie.rating = Double.toString(item.getRating().getPercentage() / 10);
             movie.trailer = item.getTrailer();
+            movie.filmaN = item.getFilmaN();
             movie.runtime = item.getRuntime();
             movie.synopsis = item.getSynopsis();
             movie.certification = item.getCertification();

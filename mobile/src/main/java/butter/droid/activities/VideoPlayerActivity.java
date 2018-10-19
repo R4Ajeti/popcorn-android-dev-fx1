@@ -196,7 +196,7 @@ public class VideoPlayerActivity extends ButterBaseActivity implements VideoPlay
             return;
         }
 
-        mTitle = mStreamInfo.getTitle() == null ? getString(R.string.the_video) : mStreamInfo.getTitle();
+        mTitle = "ssss";
         mFragment.onMediaReady();
     }
 

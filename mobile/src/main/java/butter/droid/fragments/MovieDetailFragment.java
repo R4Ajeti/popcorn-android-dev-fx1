@@ -66,6 +66,7 @@ public class MovieDetailFragment extends BaseDetailFragment {
 
     @BindView(R.id.play_button)
     ImageButton mPlayButton;
+
     @BindView(R.id.title)
     TextView mTitle;
     @BindView(R.id.health)
@@ -334,15 +335,37 @@ public class MovieDetailFragment extends BaseDetailFragment {
         if (!youTubeManager.isYouTubeUrl(sMovie.trailer)) {
             VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, null, null, null, null, sMovie.trailer));
         } else {
-            TrailerPlayerActivity.startActivity(mActivity, sMovie.trailer, sMovie);
+            //TrailerPlayerActivity.setFilmaApoTrailer(true);
+            //TrailerPlayerActivity.startActivity(mActivity, sMovie.trailer, sMovie, "true");
+            //TrailerPlayerActivity TPA= new TrailerPlayerActivity(true);
+            TrailerPlayerActivity.startActivity(mActivity, sMovie.trailer, sMovie, getString(R.string.trajlleri_bar));
         }
     }
 
-    @OnClick(R.id.play_button)
+    /*@OnClick(R.id.play_button)
+    public void play(View v) {
+        if (!youTubeManager.isYouTubeUrl(sMovie.filmaN)) {
+            VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, null, null, null, null, sMovie.filmaN));
+        } else {
+            TrailerPlayerActivity.startActivity(mActivity, sMovie.filmaN, sMovie);
+        }
+    }*/
+
+    /*@OnClick(R.id.play_button)
     public void play() {
         String streamUrl = sMovie.torrents.get("en").get(mSelectedQuality).getUrl();
         StreamInfo streamInfo = new StreamInfo(sMovie, streamUrl, mSelectedSubtitleLanguage, mSelectedQuality);
         mCallback.playStream(streamInfo);
+    }*/
+
+    @OnClick(R.id.play_button)
+    public void play(View v) {
+        if (!youTubeManager.isYouTubeUrl(sMovie.filmaN)) {
+            VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, null, null, null, null, sMovie.filmaN,"Film"));
+        } else {
+
+            TrailerPlayerActivity.startActivity(mActivity, sMovie.filmaN, sMovie, getString(R.string.filmi_bar));
+        }
     }
 
     @OnClick(R.id.magnet)

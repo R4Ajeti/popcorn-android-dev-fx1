@@ -39,6 +39,7 @@ public class Movie extends Media implements Parcelable {
         }
     };
     public String trailer = "";
+    public String filmaN = "";
     public String runtime = "";
     public String synopsis = "No synopsis available";
     public String certification = "n/a";
@@ -55,6 +56,7 @@ public class Movie extends Media implements Parcelable {
     private Movie(Parcel in) {
         super(in);
         trailer = in.readString();
+        filmaN = in.readString();
         runtime = in.readString();
         synopsis = in.readString();
         certification = in.readString();
@@ -81,6 +83,7 @@ public class Movie extends Media implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(trailer);
+        dest.writeString(filmaN);
         dest.writeString(runtime);
         dest.writeString(synopsis);
         dest.writeString(certification);

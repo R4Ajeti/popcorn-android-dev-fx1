@@ -22,11 +22,11 @@ public class Constants {
     public static Boolean DEBUG_ENABLED = BuildConfig.DEBUG; // will be set to true for debug builds and false for release builds
     public static final String PREFS_FILE = "PCT_Prefs";
     public static final Integer SERVER_PORT = 55723;
-    public static final String GIT_URL = "https://github.com/popcorn-official/popcorn-android";
+    public static final String GIT_URL = "https://github.com/r4ajeti/albanian-popcorn-android";
     public static final String BUTTER_URL = "https://popcorntime.sh/";
-    public static final String FB_URL = "https://fb.com/PopcornTimeTv";
-    public static final String BLOG_URL = "https://blog.popcorntime.sh";
-    public static final String DISCUSS_URL = "https://reddit.com/popcorntime";
-    public static final String TWITTER_URL = "https://twitter.com/PopcornTimeTv";
+    public static final String FB_URL = "https://fb.com/SinjaliComOffical";
+    public static final String BLOG_URL = "https://blog.mathtechfin.co";
+    public static final String DISCUSS_URL = "https://reddit.com/SinjaliTub";
+    public static final String TWITTER_URL = "https://twitter.com/SinjaliTube";
 
 }

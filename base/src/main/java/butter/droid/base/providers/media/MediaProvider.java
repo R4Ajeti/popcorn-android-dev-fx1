@@ -20,10 +20,18 @@ package butter.droid.base.providers.media;
 import android.accounts.NetworkErrorException;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,12 +156,86 @@ public abstract class MediaProvider extends BaseProvider {
 
         Request.Builder requestBuilder = new Request.Builder();
         String query = buildQuery(params);
-        url = url + "?" + query;
-        requestBuilder.url(url);
+        //url = url + "?" + query;
+        boolean paPytesor=false;
+        //if(paPytesor){
+        url = url + ((paPytesor) ? ("?" + query) : "");
+        //url="http://dell2017al.atwebpages.com/movies/1.json";
+        requestBuilder.url(url+".json");
+
+
 
         Timber.d(this.getClass().getSimpleName(), "Making request to: " + url);
 
         fetchList(currentList, requestBuilder, filters, callback);
+
+        //Ky kod eshte i edituar nga ketu
+        /*String data1 = "";
+        try {
+
+            URL url = new URL("https://tv-v2.api-fetch.website/movies/1");
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line ="";
+            while(line!=null){
+                line = bufferedReader.readLine();
+                data1 = data1 + line;
+            }
+
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        //Ky kod eshte i edituar nga ketu
+        /*
+        HttpURLConnection connection1=null;
+        BufferedReader reader1=null;
+        URL url1 = null;
+        try {
+            url1 = new URL("https://tv-v2.api-fetch.website/movies/1");
+            connection1 = (HttpURLConnection) url1.openConnection();
+            connection1.connect();
+
+            InputStream stream1 = connection1.getInputStream();
+            reader1 = new BufferedReader(new InputStreamReader(stream1));
+
+            StringBuffer buffer1 = new StringBuffer();
+
+            String line = "";
+            while((line = reader1.readLine()) != null)
+            {
+                buffer1.append(line);
+            }
+            line=buffer1.toString();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+            if(connection1 != null) {
+                connection1.disconnect();
+            }
+            try{
+                if(reader1 != null) {
+                    reader1.close();
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        */
+        //Ky kod eshte i edituar nga ketu
+
+
+
+        //Ky kod eshte i edituar nga ketu
+
+        int pslidhje=0;
     }
 
     /**
@@ -168,6 +250,7 @@ public abstract class MediaProvider extends BaseProvider {
             @Override
             public void onFailure(Call call, IOException e) {
                 String url = requestBuilder.build().url().toString();
+                Log.d("myTag", "On failure");
                 if (currentApi >= apiUrls.length - 1) {
                     callback.onFailure(e);
                 } else {

@@ -25,11 +25,13 @@ import butter.droid.base.providers.media.models.Show;
 
 public class StreamInfo implements Parcelable {
 
+
     private String mSubtitleLanguage;
     private String mQuality;
     private String mTorrentUrl;
     private String mVideoLocation;
     private String mTitle;
+    private String filmaApoTrailer;
     private String mImageUrl;
     private String mHeaderImageUrl;
 
@@ -49,14 +51,19 @@ public class StreamInfo implements Parcelable {
     }
 
     public StreamInfo(Media media, Show show, String torrentUrl, String subtitleLanguage, String quality) {
-        this(media, show, torrentUrl, subtitleLanguage, quality, null);
+        this(media, show, torrentUrl, subtitleLanguage, quality, null, "film");
     }
 
     public StreamInfo(Media media, Show show, String torrentUrl, String subtitleLanguage, String quality, String videoLocation) {
+        this(media, show, torrentUrl, subtitleLanguage, quality, videoLocation, null);
+    }
+
+    public StreamInfo(Media media, Show show, String torrentUrl, String subtitleLanguage, String quality, String videoLocation, String filmaApoTrailer) {
         mTorrentUrl = torrentUrl;
         mSubtitleLanguage = subtitleLanguage;
         mQuality = quality;
         mVideoLocation = videoLocation;
+        this.filmaApoTrailer = filmaApoTrailer;
 
         if (media != null) {
             if (show != null) {
@@ -86,6 +93,10 @@ public class StreamInfo implements Parcelable {
 
     public String getTitle() {
         return mTitle;
+    }
+
+    public String getFilmaApoTrailer() {
+        return filmaApoTrailer;
     }
 
     public String getShowTitle() {
@@ -150,6 +161,7 @@ public class StreamInfo implements Parcelable {
         dest.writeString(this.mImageUrl);
         dest.writeString(this.mHeaderImageUrl);
         dest.writeString(this.mTitle);
+        dest.writeString(this.filmaApoTrailer);
         dest.writeInt(this.mIsShow ? 1 : 0);
         dest.writeInt(this.mColor);
         dest.writeParcelable(this.mMedia, 0);
@@ -165,6 +177,7 @@ public class StreamInfo implements Parcelable {
         this.mImageUrl = in.readString();
         this.mHeaderImageUrl = in.readString();
         this.mTitle = in.readString();
+        this.filmaApoTrailer = in.readString();
         this.mIsShow = in.readInt() == 1;
         this.mColor = in.readInt();
         this.mMedia = in.readParcelable(Media.class.getClassLoader());

@@ -29,6 +29,7 @@ import butter.droid.base.manager.provider.ProviderManager;
 public abstract class Media implements Parcelable {
 
     public String videoId;
+    //public String filmaN;
     public String imdbId;
     public String title;
     public String year;
@@ -46,6 +47,7 @@ public abstract class Media implements Parcelable {
 
     public Media(Parcel in) {
         videoId = in.readString();
+        //filmaN = in.readString();
         imdbId = in.readString();
         title = in.readString();
         year = in.readString();
@@ -75,6 +77,7 @@ public abstract class Media implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(videoId);
+        //dest.writeString(filmaN);
         dest.writeString(imdbId);
         dest.writeString(title);
         dest.writeString(year);

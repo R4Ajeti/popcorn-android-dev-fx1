@@ -31,6 +31,8 @@ public class Movie extends ResponseItem {
     private int released;
     @JsonProperty("trailer")
     private String trailer;
+    @JsonProperty("filmaN")
+    private String filmaN;
     @JsonProperty("certification")
     private String certification;
     @JsonProperty("torrents")
@@ -156,6 +158,20 @@ public class Movie extends ResponseItem {
      */
     public void setTrailer(String trailer) {
         this.trailer = trailer;
+    }
+
+    /**
+     * @return The filmaN
+     */
+    public String getFilmaN() {
+        return filmaN;
+    }
+
+    /**
+     * @param filmaN The filmaN
+     */
+    public void setFilmaN(String filmaN) {
+        this.filmaN = filmaN;
     }
 
     /**
