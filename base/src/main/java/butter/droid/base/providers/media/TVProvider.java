@@ -39,7 +39,7 @@ import okhttp3.OkHttpClient;
 public class TVProvider extends MediaProvider {
 
     public TVProvider(OkHttpClient client, ObjectMapper mapper, @Nullable SubsProvider subsProvider) {
-        super(client, mapper, subsProvider, BuildConfig.TV_URLS, "shows/", "show/", 0);
+        super(client, mapper, subsProvider, BuildConfig.TV_URLS, "api/shows.php", "show/", 0);
     }
 
     @Override

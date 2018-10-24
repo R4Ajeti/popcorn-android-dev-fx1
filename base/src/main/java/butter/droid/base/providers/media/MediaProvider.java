@@ -145,13 +145,15 @@ public abstract class MediaProvider extends BaseProvider {
                 break;
         }
 
+
         params.add(new AbstractMap.SimpleEntry<>("sort", sort));
 
         String url = apiUrls[currentApi] + itemsPath;
+        url=url+"";
         if (filters.page != null) {
-            url += filters.page;
+            url += "?q="+filters.page;
         } else {
-            url += "1";
+            url += "?q="+"1";
         }
 
         Request.Builder requestBuilder = new Request.Builder();
@@ -159,9 +161,10 @@ public abstract class MediaProvider extends BaseProvider {
         //url = url + "?" + query;
         boolean paPytesor=false;
         //if(paPytesor){
-        url = url + ((paPytesor) ? ("?" + query) : "");
+        url = url + ((paPytesor) ? ("&" + query) : "");
         //url="http://dell2017al.atwebpages.com/movies/1.json";
-        requestBuilder.url(url+".json");
+        //url="http://dell2017al.atwebpages.com/api/movies.php";
+        requestBuilder.url(url);
 
 
 

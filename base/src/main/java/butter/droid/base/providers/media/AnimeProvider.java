@@ -40,7 +40,7 @@ import okhttp3.OkHttpClient;
 public class AnimeProvider extends MediaProvider {
 
     public AnimeProvider(OkHttpClient client, ObjectMapper mapper, @Nullable SubsProvider subsProvider) {
-        super(client, mapper, subsProvider, BuildConfig.ANIME_URLS, "animes/", "anime/", 0);
+        super(client, mapper, subsProvider, BuildConfig.ANIME_URLS, "api/animes.php", "anime/", 0);
     }
 
     @Override
