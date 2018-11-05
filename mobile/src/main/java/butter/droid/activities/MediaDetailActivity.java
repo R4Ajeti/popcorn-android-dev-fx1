@@ -72,7 +72,9 @@ public class MediaDetailActivity extends ButterBaseActivity implements BaseDetai
     public static void startActivity(Context context, Media media) {
         Intent intent = new Intent(context, MediaDetailActivity.class);
         if (media != null)
+        {   sMedia=null;
             sMedia = media;
+        }
         context.startActivity(intent);
     }
 

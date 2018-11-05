@@ -20,6 +20,7 @@ package butter.droid.base.torrent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import butter.droid.base.R;
 import butter.droid.base.providers.media.models.Media;
 import butter.droid.base.providers.media.models.Show;
 
@@ -75,7 +76,9 @@ public class StreamInfo implements Parcelable {
                 mShowTitle = show.title == null ? "" : show.title;
                 mShowEpisodeTitle = media.title == null ? "" : media.title;
             } else {
-                mTitle = media.title == null ? "" : media.title;
+                //if(media.title != null && (media.title).contains("|-*-| Filmi"))
+                String title = media.title + " |-*-| Filmi";
+                mTitle = title == null ? "" : title;
                 mImageUrl = media.image;
                 mHeaderImageUrl = media.headerImage;
                 mColor = media.color;

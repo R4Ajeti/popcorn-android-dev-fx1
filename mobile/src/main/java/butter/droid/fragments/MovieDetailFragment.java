@@ -2,6 +2,7 @@ package butter.droid.fragments;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
@@ -47,6 +50,8 @@ import butter.droid.base.utils.ThreadUtils;
 import butter.droid.base.utils.VersionUtils;
 import butter.droid.fragments.base.BaseDetailFragment;
 import butter.droid.fragments.dialog.SynopsisDialogFragment;
+import butter.droid.fragments.hosts.HostStreamType;
+import butter.droid.fragments.hosts.JGDriveStreamN;
 import butter.droid.widget.OptionSelector;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +68,7 @@ public class MovieDetailFragment extends BaseDetailFragment {
     private String mSelectedSubtitleLanguage, mSelectedQuality;
     private Boolean mAttached = false;
     private Magnet mMagnet;
+    public static String jgdlink=null;
 
     @BindView(R.id.play_button)
     ImageButton mPlayButton;
@@ -358,14 +364,28 @@ public class MovieDetailFragment extends BaseDetailFragment {
         mCallback.playStream(streamInfo);
     }*/
 
-    @OnClick(R.id.play_button)
-    public void play(View v) {
-        if (!youTubeManager.isYouTubeUrl(sMovie.filmaN)) {
-            VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, null, null, null, null, sMovie.filmaN,"Film"));
-        } else {
 
-            TrailerPlayerActivity.startActivity(mActivity, sMovie.filmaN, sMovie, getString(R.string.filmi_bar));
-        }
+
+    @OnClick(R.id.play_button)
+    public void play(View v){
+            HostStreamType HostStreamObject = new HostStreamType(sMovie.filmaN);
+            HostStreamObject.isHostDriveUrlBuild();
+
+            if(HostStreamObject.getIndent()!=-1){
+                HostStreamObject.buildN();
+                System.out.println("JDLink: "+HostStreamObject.toString());
+                //TrailerPlayerActivity.startActivity(mActivity, HostStreamObject.toString(), sMovie, getString(R.string.filmi_bar));
+                VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, null, null, null, null, HostStreamObject.toString(),"Film"));
+                //VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, HostStreamObject.toString(), null, mSelectedQuality);
+                //VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, null, null, null, null, HostStreamObject.toString()));
+            }else {
+                VideoPlayerActivity.startActivity(mActivity, new StreamInfo(sMovie, null, null, null, null, sMovie.filmaN,"Film"));
+                //String streamUrl = sMovie.torrents.get("en").get(mSelectedQuality).getUrl();
+                /*String streamUrl = sMovie.filmaN;
+                StreamInfo streamInfo = new StreamInfo(sMovie, streamUrl, mSelectedSubtitleLanguage, mSelectedQuality);
+                mCallback.playStream(streamInfo);*/
+            }
+
     }
 
     @OnClick(R.id.magnet)
@@ -409,3 +429,4 @@ public class MovieDetailFragment extends BaseDetailFragment {
         }
     }
 }
+

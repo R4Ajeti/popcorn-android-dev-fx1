@@ -280,4 +280,3 @@ public class VideoPlayerActivity extends ButterBaseActivity implements VideoPlay
     }
 
 }
-
